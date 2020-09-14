@@ -1,0 +1,42 @@
+
+{% extends 'main.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Detayı</title>
+</head>
+<body>
+    {% block body %}
+      
+    {% for data in detail %}
+    
+    <div class="container">
+            <div class="card-body">
+               <div class="row">
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mt-5">
+                    <img src="{{data.image}}" class="float-left img-fluid" >
+                    <i class="float-right mt-4 pr-2" style="color: gray;font-size: small;">Yayımlanma Tarihi: <strong>{{data.postdata}}</strong></i><br>
+                    <p class="float-right mt-4 pr-2 " style="color: gray;font-size: small;">Yazar: <strong>{{data.author}}</strong></p>
+                    <a href="{% url 'index' %}" class="btn btn-dark" title="Anasayfa'ya Git"><i class="fas fa-arrow-circle-left"></i></a>
+                </div>
+                <div  class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 mt-2">
+                    <center><span class="h3" style="text-align: center;font-family: initial;">{{data.header}}</span></center>
+
+                    <div class="mr-auto ml-auto mt-3" style="width: 100%;text-align: left;position: relative;font-size: smaller;">
+                        {{data.content}}
+                    </div>
+                </div>
+               </div>
+
+                
+            </div>
+    </div>
+    {% endfor %}
+    
+    {% endblock body %}
+    
+</body>
+</html>

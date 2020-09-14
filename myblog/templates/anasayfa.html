@@ -1,0 +1,99 @@
+{% extends 'main.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+
+
+    <title>Anasayfa</title>
+
+
+</head>
+
+<body>
+    {% block body %}
+    <style>
+        .ucnokta {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        #dataimage{
+            filter: brightness(50%);
+        }
+        #dataimage:hover{
+            filter: brightness(80%);
+            animation-name: image;
+            animation-duration: 3s;
+            cursor: pointer;
+        }
+        @keyframes image{
+            0%{
+                box-shadow: 1px 1px 1px 1px darkgray;
+            }
+            50%{
+                box-shadow: 3px 3px 3px 3px darkgray;
+            }
+            100%{
+                box-shadow: 1px 1px 1px 1px darkgray;
+            }
+        }
+    </style>
+    <div>
+        <center><img src="{% static 'img/logo.png' %}" class="img-fluid rounded-circle mt-4 " width="105" height="105">
+        </center>
+    </div>
+    <hr>
+    <div class="container w-100 mt-5">
+        <center><span>{% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <span class="alert alert-danger" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+                {% endfor %}
+            </ul>
+            {% endif %}</span></center>
+        <div class="row">
+            
+            {% for veri in data %}
+            
+            <div class="col-12 col-sm-12 col-md-6 col-xl-6 col-lg-6 mb-4">
+                    <div class="card-header">
+                        <img class="img-fluid" src="{{veri.image}}" id ="dataimage">
+
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <h5>{{veri.header}}</h5>
+
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div  class="ucnokta">
+                                    <small>{{veri.content}}</small>
+                                </div>
+                                <span class="float-left mt-3">
+                                    <small style="color: darkgray;"><i>{{veri.postdata}}  | </i></small>
+                                    <small style="color: darkgray;">{{veri.author}}</small>
+                                </span>
+                                <a class="btn btn-dark mt-4 float-right" href="{% url 'postdetail' veri.id %}">Devamı...</a>
+                            </div>
+                        </div>
+
+                </div>
+
+            </div>
+              
+            {% endfor %}
+        </div>
+    </div>
+
+    {% endblock body %}
+</body>
+
+</html>
